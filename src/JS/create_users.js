@@ -1,12 +1,45 @@
 const list = document.getElementById('allusers');
 
-const users = {
-		"lebojo" : 0, 
-		"legoyave": 0,
-		"lebojo2": 0,
-		"legoyave2": 0,
-		"lebojo3": 0,
-};
+const users = {};
+
+const streamersArray = [
+	'Fudro',
+	'LeGoyave',
+	'Imunicorn',
+	'Leo',
+	'Bonus',
+	'Audwui',
+	'Baty',
+	'Bboxingame',
+	'Dine',
+	'EasyNova',
+	'EENOW',
+	'FredFuxx',
+	'GBRL',
+	'Ragy',
+	'Lenchanteur',
+	'LoryChoupi',
+	'MogiBlue',
+	'Mimil',
+	'Nottos',
+	'Okamix',
+	'Parabellum',
+	'PeakyChan',
+	'PoupouLeSuisse',
+	'Ronix',
+	'LeRonron',
+	'Shiinro',
+	'Shinkuro',
+	'Shivas',
+	'SonicBlow',
+	'SuniStream',
+	'Tsunadida',
+	'Vostfrere'
+];  
+
+streamersArray.forEach(streamer => {
+	users[streamer] = 0;
+});
 
 function createDiv(text) {
 	const div = document.createElement('div');
