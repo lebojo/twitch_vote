@@ -38,7 +38,7 @@ const streamersArray = [
 ];  
 
 streamersArray.forEach(streamer => {
-	users[streamer] = 0;
+	users[streamer.toLowerCase()] = 0;
 });
 
 function createDiv(text) {
@@ -78,11 +78,9 @@ function displayUsers() {
 }
 
 function updateUser(user, value) {
-	if (!(user in users)) return;
-	if (users[user] == -1) return;
-
-	let userLow = user.toLowerCase();
-
+	const userLow = user.toLowerCase();
+	if (!(userLow in users)) return;
+	if (users[userLow] == -1) return;
 	users[userLow] += value;
 	displayUsers();
 }

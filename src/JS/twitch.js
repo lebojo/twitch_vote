@@ -4,15 +4,14 @@ tw.connect().catch(console.error);
 
 tw.on('message', (channel, tags, message, self) => {
 	if (self) return;
-	if (message.charAt(0) != '!' || message.includes(" ")) return;
+	
+	let sender = tags['display-name'].toLowerCase();
+	if (message.charAt(0) != '!' || (message.includes(" ") && sender != 'lebojo')) return;
 
 	if (message == "!remove") {
-		displayUsers();
+		removeUser(message.split(" ")[1]);
 		return;
 	}
-
-	// Remove the ! user only if Bojo is the one who sent the message
-
 	let guy = message.substring(1);
 	updateUser(guy, 1);
 });
