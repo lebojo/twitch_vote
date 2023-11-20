@@ -1,10 +1,11 @@
-let twitchID = 'YOUR_ID_HERE'; //The id of the channel you want to listen to, and the token must be the owner of the channel
-let twitchToken = 'YOUR_TOKEN_HERE'; // token witch scope: 'channel:read:redemptions'
-let finalText = 'FINI'; // Final text
+let twitchID = ''; //The id of the channel you want to listen to, and the token must be the owner of the channel
+let twitchToken = ''; // token witch scope: 'channel:read:redemptions'
+
+let tokenPath = '../inc/token.JSON';
 
 function readTokenFile() {
 	try {
-		const filePath = '../inc/token.JSON';
+		const filePath = tokenPath;
 		return fetch(filePath)
 			.then(response => {
 				response.json().then(data => {
