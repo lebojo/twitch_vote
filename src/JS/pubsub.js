@@ -40,6 +40,7 @@ ws.onmessage = (event) => {
   const message = JSON.parse(event.data);
   if (message.type == 'MESSAGE') {
     const eventData = JSON.parse(message.data.message)['data']['redemption']['reward'];
+	console.log(eventData);
 	updateUser(eventData['title'], 5); // correct with good value
   }
 };

@@ -7,7 +7,6 @@ const streamersArray = [
 	'LeGoyave',
 	'Imunicorn',
 	'Leo',
-	'Bonus',
 	'Audwui',
 	'Baty',
 	'Bboxingame',
@@ -38,7 +37,11 @@ const streamersArray = [
 ];  
 
 streamersArray.forEach(streamer => {
-	users[streamer.toLowerCase()] = 0;
+	users[streamer.toLocaleLowerCase()] = {
+		'points': 0,
+		'color': getRandomGradient(),
+		'display': streamer
+	};
 });
 
 function createDiv(text) {
@@ -53,12 +56,12 @@ function createDiv(text) {
 	innerDiv.classList.add('w3-round-large');
 	innerDiv.classList.add('shadow');
 
-	innerDiv.style.background = getRandomGradient();
-	innerDiv.style.width = users[text] + "%";
+	innerDiv.style.background = users[text].color;
+	innerDiv.style.width = users[text].points + "%";
 
 	innerDiv.id = text;
 
-	innerDiv.textContent = "!" + text;
+	innerDiv.textContent = "!" + users[text].display + "(" + users[text].points + ")";
 
 	div.appendChild(innerDiv);
 
@@ -67,28 +70,32 @@ function createDiv(text) {
 
 function displayUsers() {
 	const sortedUsers = Object.fromEntries(
-		Object.entries(users).sort((a, b) => b[1] - a[1])
+		Object.entries(users).sort((a, b) => b[1].points - a[1].points)
 	);
+	let i = 0;
 	list.innerHTML = "";
 	for (const user in sortedUsers) {
-		if (sortedUsers[user] == -1) continue;
+		if (sortedUsers[user].points == -1) continue;
 		const div = createDiv(user);
 		list.appendChild(div);
+		i++;
 	}
+	document.getElementById('score').innerText = (streamersArray.length - i) + "/" + streamersArray.length;
 }
 
 function updateUser(user, value) {
 	const userLow = user.toLowerCase();
 	if (!(userLow in users)) return;
-	if (users[userLow] == -1) return;
-	users[userLow] += value;
+	if (users[userLow].points == -1) return;
+	users[userLow].points += value;
 	displayUsers();
 }
 
 function removeUser(user) {
-	if (!(user in users)) return;
-	if (users[user] == -1) return;
-	users[user] = -1;
+	const userLow = user.toLowerCase();
+	if (!(userLow in users)) return;
+	if (users[userLow].points == -1) return;
+	users[userLow].points = -1;
 	displayUsers();
 }
 
